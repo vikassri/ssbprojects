@@ -1,0 +1,14 @@
+{
+  "id" : "a595b2bf0a424420ab138541095ab6ab",
+  "name" : "sr",
+  "type" : "catalog",
+  "properties" : {
+    "table_filters" : [ ],
+    "catalog_type" : "registry",
+    "kafka.provider.id" : "fe40a6317fc93644b4d01d3089723903",
+    "registry.address" : "https://ccycloud.cdp1.root.hwx.site:7790/api/v1",
+    "registry.ssl.enabled" : true,
+    "registry.truststore.location" : "/nifi/resources/certs/cm-auto-global_truststore.jks",
+    "registry.truststore.password" : "G6n9CbpmCssGvuHO67ApkJmBcy9MGBDvPpM334j4ktq"
+  }
+}

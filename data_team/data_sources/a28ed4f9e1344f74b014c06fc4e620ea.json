@@ -1,0 +1,16 @@
+{
+  "id" : "a28ed4f9e1344f74b014c06fc4e620ea",
+  "name" : "hive",
+  "type" : "catalog",
+  "properties" : {
+    "table_filters" : [ {
+      "database_filter" : "promotions",
+      "table_filter" : ""
+    }, {
+      "database_filter" : "customer_temp",
+      "table_filter" : ""
+    } ],
+    "catalog_type" : "hive",
+    "default-database" : "default"
+  }
+}

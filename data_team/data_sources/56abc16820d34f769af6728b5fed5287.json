@@ -1,0 +1,10 @@
+{
+  "id" : "56abc16820d34f769af6728b5fed5287",
+  "name" : "kudu",
+  "type" : "catalog",
+  "properties" : {
+    "table_filters" : [ ],
+    "catalog_type" : "kudu",
+    "kudu.masters" : "ccycloud.cdp1.root.hwx.site:7051"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "job_name" : "promotion_job",
+  "api_endpoints" : [ ],
+  "sql" : "insert into `kudu`.`default_database`.`promotions.promo_sent` \nSELECT EVENT_TIME, cus.f_name as FIRST_NAME ,cus.l_name as LAST_NAME,cus.email as EMAIL ,cus.gender as GENDER, cus.phone as PHONE, cus.card as CARD ,PROMO_MSG, BRAND_NAME\nFROM (SELECT\n      txn1.ts as EVENT_TIME,\n      txn1.account_id as ACCOUNT_ID,\n      txn1.transaction_id AS TRANSACTION_ID,\n      promos.promo_msg AS PROMO_MSG,\n      promos.brand_name AS BRAND_NAME,\n      txn1.lat AS LAT,\n      txn1.lon AS LON,\n      HAVETOKM(cast (txn1.lat as string) , cast(txn1.lon as string) , cast(promos.lat as string) , cast(promos.lon as string)) as distance\nFROM  txn1 \nCROSS JOIN  promos\nwhere\n     HAVETOKM(cast (txn1.lat as string) , cast(txn1.lon as string) , cast(promos.lat as string) , cast(promos.lon as string)) < 1) PMP\nJOIN  `kudu`.`default_database`.`fraud_demo.customers` cus\n      ON cus.acc_id = PMP.ACCOUNT_ID",
+  "mv_config" : {
+    "name" : "promotion_job",
+    "retention" : 300,
+    "min_row_retention_count" : 0,
+    "recreate" : false,
+    "key_column_name" : null,
+    "column_indices_disabled" : false,
+    "indexed_columns" : [ ],
+    "not_indexed_columns" : [ ],
+    "api_key" : null,
+    "ignore_nulls" : false,
+    "require_restart" : false,
+    "batch_size" : 0,
+    "enabled" : false
+  },
+  "runtime_config" : {
+    "execution_mode" : "SESSION",
+    "parallelism" : 1,
+    "sample_interval" : 1000,
+    "sample_count" : 100,
+    "window_size" : 100,
+    "start_with_savepoint" : false,
+    "log_config" : {
+      "type" : "LOG4J_PROPERTIES",
+      "content" : "\nrootLogger.level = INFO\nrootLogger.appenderRef.file.ref = MainAppender\n#Uncomment this if you want to _only_ change Flink's logging\n#logger.flink.name = org.apache.flink\n#logger.flink.level = INFO\n\n# The following lines keep the log level of common libraries/connectors on\n# log level INFO. The root logger does not override this. You have to manually\n# change the log levels here.\nlogger.akka.name = akka\nlogger.akka.level = INFO\nlogger.kafka.name= org.apache.kafka\nlogger.kafka.level = INFO\nlogger.hadoop.name = org.apache.hadoop\nlogger.hadoop.level = INFO\nlogger.zookeeper.name = org.apache.zookeeper\nlogger.zookeeper.level = INFO\n\n# Log all infos in the given file\nappender.main.name = MainAppender\nappender.main.type = File\nappender.main.append = false\nappender.main.fileName = /var/log/ssb\nappender.main.layout.type = PatternLayout\nappender.main.layout.pattern = %d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %-60c %x - %m%n\n\n# Suppress the irrelevant (wrong) warnings from the Netty channel handler\nlogger.netty.name = org.apache.flink.shaded.akka.org.jboss.netty.channel.DefaultChannelPipeline\nlogger.netty.level = OFF\n"
+    }
+  }
+}
