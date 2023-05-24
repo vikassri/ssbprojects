@@ -1,0 +1,18 @@
+{
+  "metadata" : {
+    "fields.power.expression" : "#{superhero.power}",
+    "fields.name.expression" : "#{superhero.name}",
+    "connector" : "faker",
+    "schema.2.data-type" : "INT",
+    "schema.0.data-type" : "VARCHAR(2147483647)",
+    "fields.power.null-rate" : "0.05",
+    "schema.2.name" : "age",
+    "schema.1.name" : "power",
+    "fields.age.expression" : "#{number.numberBetween '0','1000'}",
+    "schema.0.name" : "name",
+    "schema.1.data-type" : "VARCHAR(2147483647)"
+  },
+  "type" : "ssb",
+  "table_name" : "heros",
+  "transform_code_b64_encoded" : false
+}
