@@ -6,5 +6,6 @@
     "table_filters" : [ ],
     "catalog_type" : "kudu",
     "kudu.masters" : "ccycloud.cdp1.root.hwx.site:7051"
-  }
+  },
+  "custom_truststore" : false
 }

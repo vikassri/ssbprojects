@@ -1,9 +1,9 @@
 {
-  "job_name" : "test_job",
+  "job_name" : "startburst_jdbc",
   "api_endpoints" : [ ],
   "sql" : "select * from `sr`.`default_database`.`promos`;",
   "mv_config" : {
-    "name" : "test_job",
+    "name" : "startburst_jdbc",
     "retention" : 300,
     "min_row_retention_count" : 0,
     "recreate" : false,

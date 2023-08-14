@@ -1,6 +1,7 @@
 {
   "job_name" : "data_test",
   "api_endpoints" : [ ],
+  "sql" : "select * from promos",
   "mv_config" : {
     "name" : "data_test",
     "retention" : 300,

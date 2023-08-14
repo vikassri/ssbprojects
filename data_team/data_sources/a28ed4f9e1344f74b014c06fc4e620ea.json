@@ -12,5 +12,6 @@
     } ],
     "catalog_type" : "hive",
     "default-database" : "default"
-  }
+  },
+  "custom_truststore" : false
 }

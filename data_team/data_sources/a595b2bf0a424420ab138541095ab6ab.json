@@ -10,5 +10,6 @@
     "registry.ssl.enabled" : true,
     "registry.truststore.location" : "/nifi/resources/certs/cm-auto-global_truststore.jks",
     "registry.truststore.password" : "G6n9CbpmCssGvuHO67ApkJmBcy9MGBDvPpM334j4ktq"
-  }
+  },
+  "custom_truststore" : false
 }
