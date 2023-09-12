@@ -1,0 +1,16 @@
+{
+  "metadata" : {
+    "fields.cif_num.expression" : "#{Options.option 'YYYY')}",
+    "number-of-rows" : "10000",
+    "connector" : "faker",
+    "schema.0.data-type" : "VARCHAR(2147483647)",
+    "rows-per-second" : "3",
+    "schema.1.name" : "score",
+    "fields.score.expression" : "#{number.numberBetween '1','1'}",
+    "schema.0.name" : "cif_num",
+    "schema.1.data-type" : "INT"
+  },
+  "type" : "ssb",
+  "table_name" : "faker_adobe_streaming",
+  "transform_code_b64_encoded" : false
+}

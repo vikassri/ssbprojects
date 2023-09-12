@@ -1,0 +1,32 @@
+{
+  "job_name" : "_00_create_tables",
+  "api_endpoints" : [ ],
+  "sql" : "DROP TABLE IF EXISTS rtp_serving_int_test;\nCREATE TABLE `rtp_serving_int_test` (\n  `cif_num` VARCHAR(20) NOT NULL,\n  `score` int NOT NULL,\n  CONSTRAINT `PK_cif_num` PRIMARY KEY (`cif_num`) NOT ENFORCED\n) WITH (\n  'url' = 'jdbc:postgresql://csa111x-1.csa111x.root.hwx.site:5432/eventador_snapper',\n  'password' = 'cloudera',\n  'connector' = 'jdbc',\n  'driver' = 'org.postgresql.Driver',\n  'table-name' = 'rtp_serving_int_test',\n  'username' = 'eventador_snapper'\n); \n\nDROP TABLE IF EXISTS faker_adobe_streaming;\nCREATE TABLE `faker_adobe_streaming` (\n  `cif_num` VARCHAR(2147483647),\n  `score` INT\n) WITH (\n  'number-of-rows' = '10000',\n  'connector' = 'faker',\n  'fields.cif_num.expression' = '#{Options.option ''YYYY'')}',\n  'fields.score.expression' = '#{number.numberBetween ''1'',''1''}',\n  'rows-per-second' = '3'\n);\n\nDROP TABLE IF EXISTS adobe_streaming_kafka;\nCREATE TABLE adobe_streaming_kafka\nWITH (\n  'connector' = 'kafka',\n  'topic' = 'adobe_streaming',\n  'properties.request.timeout.ms' = '120000',\n  'properties.bootstrap.servers' = 'csa111x-1.csa111x.root.hwx.site:9092',\n  'properties.group.id' = 'testGroup',\n  'properties.auto.offset.reset' = 'earliest',\n  'value.format' = 'json'\n) LIKE faker_adobe_streaming (EXCLUDING OPTIONS);",
+  "mv_config" : {
+    "name" : "_00_create_tables",
+    "retention" : 300,
+    "min_row_retention_count" : 0,
+    "recreate" : false,
+    "key_column_name" : null,
+    "column_indices_disabled" : false,
+    "indexed_columns" : [ ],
+    "not_indexed_columns" : [ ],
+    "api_key" : null,
+    "ignore_nulls" : false,
+    "require_restart" : false,
+    "batch_size" : 0,
+    "enabled" : false
+  },
+  "runtime_config" : {
+    "execution_mode" : "SESSION",
+    "parallelism" : 1,
+    "sample_interval" : 1000,
+    "sample_count" : 100,
+    "window_size" : 100,
+    "start_with_savepoint" : false,
+    "log_config" : {
+      "type" : "LOG4J_PROPERTIES",
+      "content" : "\nrootLogger.level = INFO\nrootLogger.appenderRef.file.ref = MainAppender\n#Uncomment this if you want to _only_ change Flink's logging\n#logger.flink.name = org.apache.flink\n#logger.flink.level = INFO\n\n# The following lines keep the log level of common libraries/connectors on\n# log level INFO. The root logger does not override this. You have to manually\n# change the log levels here.\nlogger.akka.name = akka\nlogger.akka.level = INFO\nlogger.kafka.name= org.apache.kafka\nlogger.kafka.level = INFO\nlogger.hadoop.name = org.apache.hadoop\nlogger.hadoop.level = INFO\nlogger.zookeeper.name = org.apache.zookeeper\nlogger.zookeeper.level = INFO\n\n# Log all infos in the given file\nappender.main.name = MainAppender\nappender.main.type = File\nappender.main.append = false\nappender.main.fileName = /var/log/ssb\nappender.main.layout.type = PatternLayout\nappender.main.layout.pattern = %d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %-60c %x - %m%n\n\n# Suppress the irrelevant (wrong) warnings from the Netty channel handler\nlogger.netty.name = org.apache.flink.shaded.akka.org.jboss.netty.channel.DefaultChannelPipeline\nlogger.netty.level = OFF\n"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "metadata" : {
+    "password" : "cloudera",
+    "connector" : "jdbc",
+    "driver" : "org.postgresql.Driver",
+    "schema.0.data-type" : "VARCHAR(20) NOT NULL",
+    "schema.primary-key.name" : "PK_cif_num",
+    "schema.primary-key.columns" : "cif_num",
+    "table-name" : "rtp_serving_int_test",
+    "schema.1.name" : "score",
+    "url" : "jdbc:postgresql://csa111x-1.csa111x.root.hwx.site:5432/eventador_snapper",
+    "username" : "eventador_snapper",
+    "schema.0.name" : "cif_num",
+    "schema.1.data-type" : "INT NOT NULL"
+  },
+  "type" : "ssb",
+  "table_name" : "rtp_serving_int_test",
+  "transform_code_b64_encoded" : false
+}

@@ -1,0 +1,18 @@
+{
+  "metadata" : {
+    "properties.bootstrap.servers" : "csa111x-1.csa111x.root.hwx.site:9092",
+    "properties.auto.offset.reset" : "earliest",
+    "connector" : "kafka",
+    "properties.request.timeout.ms" : "120000",
+    "value.format" : "json",
+    "schema.0.data-type" : "VARCHAR(2147483647)",
+    "topic" : "adobe_streaming",
+    "properties.group.id" : "testGroup",
+    "schema.1.name" : "score",
+    "schema.0.name" : "cif_num",
+    "schema.1.data-type" : "INT"
+  },
+  "type" : "ssb",
+  "table_name" : "adobe_streaming_kafka",
+  "transform_code_b64_encoded" : false
+}
